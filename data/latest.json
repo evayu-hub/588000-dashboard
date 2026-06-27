@@ -1,0 +1,37 @@
+{
+  "symbol": "588000 科创50ETF华夏",
+  "track": "跟踪科创50指数(000688)· 半导体/AI算力权重为主",
+  "checkpoint": "周末样本(非实盘)",
+  "asof": "2026-06-26 收盘基准",
+  "updated_at": "2026-06-28 12:00",
+  "view": {
+    "direction": "偏空震荡",
+    "prob": "6 成",
+    "reason": "创新高+近一周+8%已透支,叠加6/26板块跳水、美股芯片回调、美联储转鹰,四重逆风。",
+    "confirm": "放量重回 6/24 新高之上 → 主升延续,可跟",
+    "invalidate": "跌破近一周起涨平台 → 短线转弱,止盈/减仓",
+    "watch": [
+      "科创50指数(000688)能否收红",
+      "半导体板块资金净流入还是流出",
+      "NVDA 隔夜是否守住 $191"
+    ]
+  },
+  "price": [
+    { "name": "588000 最新价", "value": "约 2.0 元", "note": "【待核对】二手摘要 1.84~2.19 打架" },
+    { "name": "科创50指数", "value": "约 1657(6/24 新高)", "note": "YTD +30%" },
+    { "name": "近一周", "value": "+7.98%", "note": "快速拉升后高位" }
+  ],
+  "news": [
+    { "time": "06-26 16:24", "text": "日本央行行长植田出院,将推进后续加息进程", "src": "金十数据", "url": "https://www.jin10.com" },
+    { "time": "06-26", "text": "美股全球科技股抛售,AI数据中心成本担忧+OpenAI传推迟IPO,芯片股承压", "src": "TheStreet", "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-26-2026" },
+    { "time": "06-26", "text": "A股普跌:沪指-2.26%,创业板-4.07%,算力硬件集体调整", "src": "新浪财经", "url": "https://k.sina.com.cn/article_7857201856_1d45362c001907fq2i.html" }
+  ],
+  "sentiment": "主流偏亢奋(创新高+净申购),但6/26板块跳水后分歧骤增,股吧出现'高位要不要止盈'拉锯。高位大额净申购=潜在获利盘堆积,需防退潮反向。",
+  "risk": "美联储PCE +4.1%(近三年最高),年内可能加息→压制高估值科技股;NVDA已-10%进入技术性回调;ETF高β高波动,单日±3~5%常见,板块系统性回调躲不掉。",
+  "datacheck": [
+    { "item": "金十快讯·植田加息", "value": "出院将推进加息", "src": "jin10.com", "url": "https://www.jin10.com", "time": "06-26 16:24" },
+    { "item": "A股6/26收盘", "value": "沪指-2.26% / 创业板-4.07%", "src": "新浪财经", "url": "https://k.sina.com.cn/article_7857201856_1d45362c001907fq2i.html", "time": "06-26" },
+    { "item": "NVDA 6/26", "value": "$192.53 (-1.64%)", "src": "CNBC", "url": "https://www.cnbc.com/quotes/NVDA", "time": "06-26" },
+    { "item": "科创50 YTD", "value": "+30%,6/24创新高", "src": "新浪财经", "url": "https://finance.sina.com.cn/wm/2026-06-24/doc-inienttu1514072.shtml", "time": "06-24" }
+  ]
+}

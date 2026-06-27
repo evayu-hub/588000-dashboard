@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>588000 短线盯盘看板</title>
+<style>
+  :root{
+    --bg:#0e1117; --card:#161b22; --line:#262d36; --txt:#e6edf3; --sub:#8b949e;
+    --up:#ff5b5b; --down:#1ec672; --warn:#f0a020; --accent:#388bfd;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6;padding:16px;max-width:780px;margin:0 auto}
+  header{padding:8px 0 16px;border-bottom:1px solid var(--line);margin-bottom:16px}
+  h1{font-size:20px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+  .track{color:var(--sub);font-size:13px;margin-top:4px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:12px}
+  .chip{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:3px 12px;color:var(--sub)}
+  .chip b{color:var(--txt)}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:14px}
+  .card h2{font-size:14px;color:var(--sub);font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:6px}
+  .view-dir{font-size:24px;font-weight:700;margin-bottom:4px}
+  .view-reason{color:var(--sub);font-size:13px;margin-bottom:14px}
+  .level{display:flex;gap:10px;padding:10px 12px;border-radius:8px;margin-bottom:8px;font-size:14px;align-items:flex-start}
+  .level .tag{font-weight:700;white-space:nowrap}
+  .confirm{background:rgba(30,198,114,.1);border:1px solid rgba(30,198,114,.3)}
+  .confirm .tag{color:var(--down)}
+  .invalidate{background:rgba(255,91,91,.1);border:1px solid rgba(255,91,91,.3)}
+  .invalidate .tag{color:var(--up)}
+  .watch{margin-top:12px}
+  .watch ol{margin-left:18px}
+  .watch li{margin:4px 0}
+  table{width:100%;border-collapse:collapse;font-size:13px}
+  td,th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+  th{color:var(--sub);font-weight:600}
+  .news-item{padding:8px 0;border-bottom:1px solid var(--line);font-size:13px}
+  .news-item:last-child{border:none}
+  .news-time{color:var(--accent);font-weight:600;margin-right:6px}
+  .news-src{color:var(--sub);font-size:11px}
+  a{color:var(--accent);text-decoration:none}
+  .price-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .price-box{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:10px}
+  .price-box .n{font-size:12px;color:var(--sub)}
+  .price-box .v{font-size:18px;font-weight:700;margin:2px 0}
+  .price-box .note{font-size:11px;color:var(--warn)}
+  .risk{color:#ffd9a0;font-size:13px}
+  .warn-banner{background:rgba(240,160,32,.15);border:1px solid var(--warn);color:var(--warn);padding:10px 14px;border-radius:8px;margin-bottom:14px;font-size:13px;display:none}
+  footer{color:var(--sub);font-size:11px;text-align:center;padding:18px 0;line-height:1.8}
+  .pulse{width:8px;height:8px;border-radius:50%;background:var(--down);display:inline-block;animation:p 2s infinite}
+  @keyframes p{0%,100%{opacity:1}50%{opacity:.3}}
+</style>
+</head>
+<body>
+<div id="warn" class="warn-banner"></div>
+<header>
+  <h1><span class="pulse"></span><span id="symbol">588000</span></h1>
+  <div class="track" id="track"></div>
+  <div class="meta">
+    <span class="chip">检查点 <b id="checkpoint"></b></span>
+    <span class="chip">基准 <b id="asof"></b></span>
+    <span class="chip">更新 <b id="updated"></b></span>
+  </div>
+</header>
+
+<div class="card">
+  <h2>🎯 主观点</h2>
+  <div class="view-dir" id="dir"></div>
+  <div class="view-reason" id="reason"></div>
+  <div class="level confirm"><span class="tag">🟢 确认位</span><span id="confirm"></span></div>
+  <div class="level invalidate"><span class="tag">🔴 失效位</span><span id="invalidate"></span></div>
+  <div class="watch"><b>👁️ 今日只盯这 3 个数:</b><ol id="watch"></ol></div>
+</div>
+
+<div class="card">
+  <h2>📈 盘面</h2>
+  <div class="price-grid" id="price"></div>
+</div>
+
+<div class="card">
+  <h2>📰 信息面（金十快讯优先,带时间戳）</h2>
+  <div id="news"></div>
+</div>
+
+<div class="card">
+  <h2>🗣️ 市场情绪</h2>
+  <div id="sentiment" style="font-size:13px"></div>
+</div>
+
+<div class="card">
+  <h2>⚠️ 风险与反方</h2>
+  <div class="risk" id="risk"></div>
+</div>
+
+<div class="card">
+  <h2>📋 数据核对表（每个数字可点开自己核对）</h2>
+  <table><thead><tr><th>数据</th><th>数值</th><th>来源</th><th>时间</th></tr></thead>
+  <tbody id="datacheck"></tbody></table>
+</div>
+
+<footer>
+  数据每个交易日 08:30 / 09:35 / 11:30 / 12:00 / 14:50 自动更新<br>
+  本看板为信息整合与概率分析,<b>非投资建议,盈亏自负</b>。
+</footer>
+
+<script>
+const el = id => document.getElementById(id);
+function render(d){
+  el('symbol').textContent = d.symbol;
+  el('track').textContent = d.track;
+  el('checkpoint').textContent = d.checkpoint;
+  el('asof').textContent = d.asof;
+  el('updated').textContent = d.updated_at;
+  el('dir').textContent = d.view.direction + ' · 倾向 ' + d.view.prob;
+  el('dir').style.color = d.view.direction.includes('空') ? 'var(--up)' : d.view.direction.includes('多') ? 'var(--down)' : 'var(--txt)';
+  el('reason').textContent = d.view.reason;
+  el('confirm').textContent = d.view.confirm;
+  el('invalidate').textContent = d.view.invalidate;
+  el('watch').innerHTML = d.view.watch.map(w=>`<li>${w}</li>`).join('');
+  el('price').innerHTML = d.price.map(p=>`<div class="price-box"><div class="n">${p.name}</div><div class="v">${p.value}</div><div class="note">${p.note||''}</div></div>`).join('');
+  el('news').innerHTML = d.news.map(n=>`<div class="news-item"><span class="news-time">${n.time}</span>${n.text}<br><span class="news-src">— <a href="${n.url}" target="_blank">${n.src}</a></span></div>`).join('');
+  el('sentiment').textContent = d.sentiment;
+  el('risk').textContent = d.risk;
+  el('datacheck').innerHTML = d.datacheck.map(r=>`<tr><td>${r.item}</td><td>${r.value}</td><td><a href="${r.url}" target="_blank">${r.src}</a></td><td>${r.time}</td></tr>`).join('');
+}
+fetch('./data/latest.json?t='+Date.now())
+  .then(r=>{ if(!r.ok) throw 0; return r.json(); })
+  .then(render)
+  .catch(()=>{ el('warn').style.display='block'; el('warn').textContent='⚠️ 未能加载 data/latest.json —— 正式部署后由云端任务每日写入,这里会自动出数据。'; });
+</script>
+</body>
+</html>
