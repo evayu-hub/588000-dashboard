@@ -1,37 +1,30 @@
 {
   "symbol": "588000 科创50ETF华夏",
   "track": "跟踪科创50指数(000688)· 半导体/AI算力权重为主",
-  "checkpoint": "周末样本(非实盘)",
-  "asof": "2026-06-26 收盘基准",
-  "updated_at": "2026-06-28 12:00",
+  "checkpoint": "08:30开盘前瞻(云端首测·本地代发)",
+  "asof": "周末版,基准为 2026-06-26 收盘",
+  "updated_at": "2026-06-28 01:11",
   "view": {
-    "direction": "偏空震荡",
-    "prob": "6 成",
-    "reason": "创新高+近一周+8%已透支,叠加6/26板块跳水、美股芯片回调、美联储转鹰,四重逆风。",
-    "confirm": "放量重回 6/24 新高之上 → 主升延续,可跟",
-    "invalidate": "跌破近一周起涨平台 → 短线转弱,止盈/减仓",
-    "watch": [
-      "科创50指数(000688)能否收红",
-      "半导体板块资金净流入还是流出",
-      "NVDA 隔夜是否守住 $191"
-    ]
+    "direction": "震荡偏多",
+    "prob": "5.5 成",
+    "reason": "SEMI 大幅上调半导体设备市场(催化)+ NVDA 守住 $191 + 美股仅小跌(-0.24%),反弹动能 > A股上周五急跌后的回补压力。",
+    "confirm": "站上 2.15 元 → 反弹确立,可跟",
+    "invalidate": "跌破 2.05 元 → 反弹失败,离场/观望",
+    "watch": ["NVDA $191 支撑是否守住", "半导体板块资金净流向", "科创50 红盘能否维持到 10:00"]
   },
   "price": [
-    { "name": "588000 最新价", "value": "约 2.0 元", "note": "【待核对】二手摘要 1.84~2.19 打架" },
-    { "name": "科创50指数", "value": "约 1657(6/24 新高)", "note": "YTD +30%" },
-    { "name": "近一周", "value": "+7.98%", "note": "快速拉升后高位" }
+    { "name": "确认位 / 失效位", "value": "2.15 / 2.05 元", "note": "云端首测给出的短线区间" },
+    { "name": "美股映射", "value": "NVDA 守 $191 · 美股 -0.24%", "note": "外部偏中性" }
   ],
   "news": [
-    { "time": "06-26 16:24", "text": "日本央行行长植田出院,将推进后续加息进程", "src": "金十数据", "url": "https://www.jin10.com" },
-    { "time": "06-26", "text": "美股全球科技股抛售,AI数据中心成本担忧+OpenAI传推迟IPO,芯片股承压", "src": "TheStreet", "url": "https://www.thestreet.com/stock-market-today/stock-market-today-dow-jones-sp-500-nasdaq-updates-june-26-2026" },
-    { "time": "06-26", "text": "A股普跌:沪指-2.26%,创业板-4.07%,算力硬件集体调整", "src": "新浪财经", "url": "https://k.sina.com.cn/article_7857201856_1d45362c001907fq2i.html" }
+    { "time": "06-27", "text": "SEMI 大幅上调半导体设备市场预测,板块催化", "src": "云端综合(待核对)", "url": "https://www.jin10.com" },
+    { "time": "06-26", "text": "美股周五仅小跌 -0.24%,NVDA 守住 $191 支撑", "src": "云端综合(待核对)", "url": "https://www.cnbc.com/quotes/NVDA" }
   ],
-  "sentiment": "主流偏亢奋(创新高+净申购),但6/26板块跳水后分歧骤增,股吧出现'高位要不要止盈'拉锯。高位大额净申购=潜在获利盘堆积,需防退潮反向。",
-  "risk": "美联储PCE +4.1%(近三年最高),年内可能加息→压制高估值科技股;NVDA已-10%进入技术性回调;ETF高β高波动,单日±3~5%常见,板块系统性回调躲不掉。",
+  "sentiment": "周末版情绪数据有限:A股上周五急跌(算力集体调整)后存在技术性反弹预期,但板块高位分歧仍在,需观察开盘资金是否回流。",
+  "risk": "A股上周五急跌,反弹动能能否延续存疑;美联储转鹰、美股芯片回调仍是外部压制。本条为云端首测周末版,实盘数据以交易日行情页为准。",
   "datacheck": [
-    { "item": "金十快讯·植田加息", "value": "出院将推进加息", "src": "jin10.com", "url": "https://www.jin10.com", "time": "06-26 16:24" },
-    { "item": "A股6/26收盘", "value": "沪指-2.26% / 创业板-4.07%", "src": "新浪财经", "url": "https://k.sina.com.cn/article_7857201856_1d45362c001907fq2i.html", "time": "06-26" },
-    { "item": "NVDA 6/26", "value": "$192.53 (-1.64%)", "src": "CNBC", "url": "https://www.cnbc.com/quotes/NVDA", "time": "06-26" },
-    { "item": "科创50 YTD", "value": "+30%,6/24创新高", "src": "新浪财经", "url": "https://finance.sina.com.cn/wm/2026-06-24/doc-inienttu1514072.shtml", "time": "06-24" }
+    { "item": "主观点方向", "value": "震荡偏多 5.5成", "src": "云端588000任务首测", "url": "https://claude.ai/code/routines/trig_01WTLVGScKHuJti81PLjTQ1d", "time": "2026-06-28" },
+    { "item": "NVDA 支撑", "value": "守住 $191", "src": "CNBC", "url": "https://www.cnbc.com/quotes/NVDA", "time": "06-26" },
+    { "item": "SEMI 设备市场", "value": "大幅上调(利好)", "src": "云端综合(待核对)", "url": "https://www.jin10.com", "time": "06-27" }
   ]
 }
